@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Vista de lista (tree) para Club -->
+    <record id="view_club_tree" model="ir.ui.view">
+        <field name="name">competicion.club.tree</field>
+        <field name="model">competicion.club</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="ciudad"/>
+                <field name="pabellon"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vista de formulario (form) para Club -->
+    <record id="view_club_form" model="ir.ui.view">
+        <field name="name">competicion.club.form</field>
+        <field name="model">competicion.club</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="ciudad"/>
+                        <field name="pabellon"/>
+                    </group>
+                    <notebook>
+                        <page string="Equipos">
+                            <field name="equipo_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="entrenador"/>
+                                    <field name="altura_media" readonly="1"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="entrenador"/>
+                                        <field name="altura_media" readonly="1"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Acción y menú para Club -->
+    <record id="action_club" model="ir.actions.act_window">
+        <field name="name">Clubs</field>
+        <field name="res_model">competicion.club</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_competicion_root" name="Competición"/>
+    <menuitem id="menu_competicion_clubs" name="Clubs" parent="menu_competicion_root" action="action_club"/>
+
+    <!-- Vista de lista (tree) para Equipo -->
+    <record id="view_equipo_tree" model="ir.ui.view">
+        <field name="name">competicion.equipo.tree</field>
+        <field name="model">competicion.equipo</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="entrenador"/>
+                <field name="club_id"/>
+                <field name="altura_media"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vista de formulario (form) para Equipo -->
+    <record id="view_equipo_form" model="ir.ui.view">
+        <field name="name">competicion.equipo.form</field>
+        <field name="model">competicion.equipo</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="entrenador"/>
+                        <field name="club_id"/>
+                        <field name="altura_media" readonly="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Jugadores">
+                            <field name="jugador_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="posicion"/>
+                                    <field name="altura"/>
+                                    <field name="numero"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="posicion"/>
+                                        <field name="altura"/>
+                                        <field name="numero"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Acción y menú para Equipo -->
+    <record id="action_equipo" model="ir.actions.act_window">
+        <field name="name">Equipos</field>
+        <field name="res_model">competicion.equipo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_competicion_equipos" name="Equipos" parent="menu_competicion_root" action="action_equipo"/>
+
+    <!-- Vista de lista (tree) para Jugador -->
+    <record id="view_jugador_tree" model="ir.ui.view">
+        <field name="name">competicion.jugador.tree</field>
+        <field name="model">competicion.jugador</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="posicion"/>
+                <field name="altura"/>
+                <field name="numero"/>
+                <field name="equipo_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vista de formulario (form) para Jugador -->
+    <record id="view_jugador_form" model="ir.ui.view">
+        <field name="name">competicion.jugador.form</field>
+        <field name="model">competicion.jugador</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="posicion"/>
+                        <field name="altura"/>
+                        <field name="numero"/>
+                        <field name="equipo_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Acción y menú para Jugador -->
+    <record id="action_jugador" model="ir.actions.act_window">
+        <field name="name">Jugadores</field>
+        <field name="res_model">competicion.jugador</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_competicion_jugadores" name="Jugadores" parent="menu_competicion_root" action="action_jugador"/>
+
+</odoo>

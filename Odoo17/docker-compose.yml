@@ -1,0 +1,35 @@
+version: '3.1'
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: postgres       # Nombre de la base de datos
+      POSTGRES_USER: odoo         # Usuario de la base de datos
+      POSTGRES_PASSWORD: odoo     # Contraseña del usuario
+    volumes:
+      - ./postgresql/data:/var/lib/postgresql/data  # Persistencia de datos
+    networks:
+      - odoo_network
+
+  web:
+    image: odoo:17.0
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"              # Puerto para acceder a Odoo
+    environment:
+      HOST: db                   # Host de la base de datos
+      USER: odoo                 # Usuario de la base de datos
+      PASSWORD: odoo             # Contraseña del usuario
+    volumes:
+      - ./odoo/custom_modules:/mnt/extra-addons  # Módulos personalizados
+      - ./odoo/config:/etc/odoo
+    networks:
+      - odoo_network
+
+volumes:
+  odoo-db-data:
+  odoo-web-data:
+
+networks:
+  odoo_network:
